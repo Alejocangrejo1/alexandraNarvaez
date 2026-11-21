@@ -51,7 +51,7 @@
       var d = i - pos, a = Math.abs(d), sign = d < 0 ? -1 : 1;
       var x = sign * (a <= 1 ? a * w * 0.62 : w * 0.62 + (a - 1) * w * 0.3);
       var z = -Math.min(a, 3) * 150;
-      var rot = reduce ? 0 : -sign * Math.min(a, 1) * 52;
+      var rot = -sign * Math.min(a, 1) * 52;   // static 3D layout stays; only the animation is skipped for reduced motion
       var sc = 1 - Math.min(a, 3) * 0.1;
       var op = a <= 1 ? 1 - a * 0.25 : Math.max(0, 0.75 * (3 - a) / 2);
       el.style.transform = 'translate3d(' + x + 'px,0,' + z + 'px) rotateY(' + rot + 'deg) scale(' + sc + ')';
@@ -104,6 +104,9 @@
     });
   });
 
+  // Stop the browser's own link/image drag, which would cancel our gesture.
+  track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+
   // Drag: cards follow the pointer, then glide to the nearest slide.
   track.addEventListener('pointerdown', function (e) {
     dragging = true; moved = false;
@@ -116,7 +119,7 @@
     if (Math.abs(dx) > 8) moved = true;
     if (!moved) return;
     var now = performance.now();
-    vel = (e.clientX - lastX) / Math.max(1, now - lastMoveT);
+    vel = (e.clientX - lastX) / Math.max(16, now - lastMoveT);
     lastX = e.clientX; lastMoveT = now;
     pos = clamp(startPos - dx / step(), -0.3, last + 0.3);
     if (reduce) render();
@@ -125,7 +128,7 @@
     if (!dragging) return;
     dragging = false;
     if (moved) {
-      var fling = -vel * 220 / step();          // a quick flick travels further
+      var fling = clamp(-vel * 120 / step(), -0.5, 0.5);   // a quick flick adds a little, never a whole lap
       target = clamp(Math.round(pos + fling), 0, last);
       if (target === Math.round(startPos) && Math.abs(e.clientX - startX) > 50) {
         target = clamp(target + (e.clientX < startX ? 1 : -1), 0, last);
