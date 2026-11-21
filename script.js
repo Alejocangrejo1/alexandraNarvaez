@@ -163,7 +163,11 @@
     ['.chips li', 'up', 140],
     ['.pet', 'up', 130],
     ['.carousel', 'zoom'],
-    ['.cat-stick', 'drop']
+    ['.cat-stick', 'drop'],
+    ['.stat', 'up', 120],
+    ['.shot-chart', 'zoom'],
+    ['.shot-notes', 'pop'],
+    ['.doc-card', 'right']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
   var items = [];
@@ -281,4 +285,153 @@
   document.addEventListener('visibilitychange', function () { if (!document.hidden) v.play().catch(function () {}); });
   v.play().catch(function () {});
   sync();
+})();
+
+// Volume bar on the video: shows on hover (mouse) or for a few seconds after a tap (touch).
+(function () {
+  var phone = document.querySelector('.phone');
+  if (!phone) return;
+  var screen = phone.querySelector('.phone-screen');
+  var timer;
+  function reveal() {
+    phone.classList.add('show-vol');
+    clearTimeout(timer);
+    timer = setTimeout(function () { phone.classList.remove('show-vol'); }, 4500);
+  }
+  screen.addEventListener('click', reveal);
+  screen.addEventListener('input', reveal);
+})();
+
+// Playful motion: profile numbers, bouncing headline letters, rising hearts,
+// sparkle trail and click bursts, and a badge that spins faster as you scroll.
+(function () {
+  var root = document.documentElement;
+  root.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Profile numbers: count up and fill the bars when they scroll into view
+  var stats = document.querySelectorAll('.stat');
+  function showStat(st) {
+    st.classList.add('fill');
+    var n = st.querySelector('[data-count]');
+    var end = parseFloat(n.getAttribute('data-count'));
+    if (reduce) { n.textContent = end.toFixed(1); return; }
+    var t0 = performance.now();
+    n.textContent = '0.0';
+    (function step(t) {
+      var p = Math.min(1, (t - t0) / 1500);
+      n.textContent = (end * (1 - Math.pow(1 - p, 3))).toFixed(1);
+      if (p < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+  if (stats.length) {
+    if (reduce || !('IntersectionObserver' in window)) {
+      stats.forEach(showStat);
+    } else {
+      var so = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          so.unobserve(e.target);
+          var i = Array.prototype.indexOf.call(stats, e.target);
+          setTimeout(function () { showStat(e.target); }, i * 160);
+        });
+      }, { threshold: 0.35 });
+      stats.forEach(function (s) { so.observe(s); });
+    }
+  }
+
+  if (reduce) return;
+
+  // Headline letters
+  document.querySelectorAll('.hero h1, .page-hero h1').forEach(function (h) {
+    h.setAttribute('aria-label', h.innerText.replace(/\s+/g, ' ').trim());
+    var i = 0, frag = document.createDocumentFragment();
+    Array.prototype.slice.call(h.childNodes).forEach(function (n) {
+      if (n.nodeType !== 3) { frag.appendChild(n.cloneNode(true)); return; }
+      n.textContent.split(/(\s+)/).forEach(function (part) {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        var w = document.createElement('span');
+        w.className = 'w';
+        w.setAttribute('aria-hidden', 'true');
+        part.split('').forEach(function (chr) {
+          var c = document.createElement('span');
+          c.className = 'ch';
+          c.style.setProperty('--i', i++);
+          c.textContent = chr;
+          w.appendChild(c);
+        });
+        frag.appendChild(w);
+      });
+    });
+    h.textContent = '';
+    h.appendChild(frag);
+  });
+
+  // Hearts and stars drifting up behind the first screen
+  var NS = 'http://www.w3.org/2000/svg';
+  var palette = ['#FF7DBB', '#FFFFFF', '#FFE27A', '#B388FF', '#FF5CA8'];
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function icon(name, size, color) {
+    var s = document.createElementNS(NS, 'svg');
+    var u = document.createElementNS(NS, 'use');
+    u.setAttribute('href', '#' + name);
+    s.appendChild(u);
+    s.setAttribute('aria-hidden', 'true');
+    s.style.cssText = 'width:' + size + 'px;height:' + size + 'px;color:' + color;
+    return s;
+  }
+  document.querySelectorAll('.hero, .page-hero').forEach(function (hero) {
+    for (var k = 0; k < 9; k++) {
+      var s = icon(pick(['heart', 'sparkle', 'star5']), 14 + Math.random() * 18, pick(palette));
+      s.setAttribute('class', 'rise');
+      s.style.left = (Math.random() * 96).toFixed(1) + '%';
+      s.style.setProperty('--rt', (9 + Math.random() * 8).toFixed(1) + 's');
+      s.style.setProperty('--rd', (-Math.random() * 14).toFixed(1) + 's');
+      hero.insertBefore(s, hero.firstChild);
+    }
+  });
+
+  // Badge spins faster while you scroll
+  var badge = document.querySelector('.badge');
+  if (badge) {
+    window.addEventListener('scroll', function () {
+      badge.style.setProperty('--rot', (window.scrollY * 0.35).toFixed(1) + 'deg');
+    }, { passive: true });
+  }
+
+  // Sparkle trail and click bursts (mouse only)
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var fx = document.createElement('div');
+    fx.className = 'fx';
+    fx.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(fx);
+    function spawn(x, y, dx, dy, size, life) {
+      if (fx.childElementCount > 70) return;
+      var s = icon(pick(['sparkle', 'heart', 'star5', 'sparkle']), size, pick(palette));
+      s.style.left = x - size / 2 + 'px';
+      s.style.top = y - size / 2 + 'px';
+      fx.appendChild(s);
+      var spin = (Math.random() - 0.5) * 220;
+      var a = s.animate([
+        { transform: 'translate(0,0) scale(1) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(.2) rotate(' + spin + 'deg)', opacity: 0 }
+      ], { duration: life, easing: 'cubic-bezier(.2,.8,.3,1)' });
+      a.onfinish = function () { s.remove(); };
+    }
+    var lx = -99, ly = -99;
+    window.addEventListener('mousemove', function (e) {
+      var d = Math.hypot(e.clientX - lx, e.clientY - ly);
+      if (d < 26) return;
+      lx = e.clientX; ly = e.clientY;
+      spawn(e.clientX, e.clientY, (Math.random() - 0.5) * 40, 28 + Math.random() * 30, 9 + Math.random() * 9, 800 + Math.random() * 400);
+    }, { passive: true });
+    window.addEventListener('click', function (e) {
+      for (var n = 0; n < 12; n++) {
+        var ang = (n / 12) * Math.PI * 2 + Math.random() * 0.4;
+        var dist = 40 + Math.random() * 50;
+        spawn(e.clientX, e.clientY, Math.cos(ang) * dist, Math.sin(ang) * dist, 12 + Math.random() * 12, 650 + Math.random() * 350);
+      }
+    });
+  }
 })();
