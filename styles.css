@@ -122,7 +122,7 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .st1{width:13%;height:13%;left:-3%;top:26%;animation:twinkle 3.6s ease-in-out infinite}
 .st2{width:10%;height:10%;right:8%;top:76%;animation:twinkle 3.6s 1s ease-in-out infinite}
 .dance{position:absolute;left:-8%;bottom:-9%;width:42%;height:auto;z-index:3;pointer-events:none;filter:drop-shadow(0 8px 0 rgba(90,50,170,.22))}
-.cat-stick{position:absolute;right:3%;bottom:4%;width:clamp(90px,11vw,140px);aspect-ratio:1;object-fit:cover;border-radius:22px;border:5px solid #fff;box-shadow:0 0 0 4px var(--hot),0 14px 24px -10px rgba(40,15,90,.6);transform:rotate(7deg);animation:wiggle2 2.4s ease-in-out infinite;background:#fff;z-index:2}
+.cat-stick{position:relative;grid-column:1/-1;justify-self:end;margin:2px 4% 0 0;width:clamp(72px,8vw,100px);aspect-ratio:1;object-fit:cover;border-radius:22px;border:5px solid #fff;box-shadow:0 0 0 4px var(--hot),0 14px 24px -10px rgba(40,15,90,.6);transform:rotate(7deg);animation:wiggle2 2.4s ease-in-out infinite;background:#fff;z-index:2}
 
 @keyframes bob{50%{transform:translateY(-12px) rotate(1.5deg)}}
 @keyframes hi{0%{transform:rotate(0)}20%{transform:rotate(-9deg) scale(1.06)}45%{transform:rotate(7deg) scale(1.08)}70%{transform:rotate(-4deg) scale(1.04)}100%{transform:rotate(0) scale(1)}}
@@ -171,10 +171,10 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .music .split>div:first-child .prose{margin-top:20px}
 .spotify-card{position:relative;background:var(--l2);border:3px solid #fff;border-radius:var(--r);padding:clamp(28px,4vw,44px);box-shadow:0 0 0 5px var(--hot),0 18px 36px -14px rgba(40,15,90,.6);transition:transform .25s var(--ease);color:var(--ink)}
 .spotify-card:hover{transform:translateY(-2px)}
-.spotify-card .eyebrow{color:var(--eyebrow)}
+.spotify-card .eyebrow{color:var(--eyebrow);padding-right:64px}
 .spotify-card h3{margin:0 0 10px}
 .spotify-card p:not(.eyebrow){margin:0 0 26px;color:var(--ink-soft)}
-.record{position:absolute;right:-18px;top:-30px;width:96px;height:96px}
+.record{position:absolute;right:-16px;top:-28px;width:84px;height:84px}
 .disc{width:100%;height:100%;border-radius:50%;background:repeating-radial-gradient(circle,#3a2170 0 3px,#5a3f9c 3px 6px);border:4px solid #fff;box-shadow:var(--shadow);display:grid;place-items:center;transition:transform 1.2s var(--ease)}
 .disc span{width:32%;height:32%;border-radius:50%;background:var(--hot);border:3px solid #fff}
 .spotify-card:hover .disc{transform:rotate(180deg)}
@@ -240,6 +240,28 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .foot p{margin:0;font-size:1rem}
 .foot-img{width:78px;height:78px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 4px var(--hot);background:url(images/kuromi-wave.png) 48% 55%/150% no-repeat;margin-bottom:10px}
 
+/* Cut-out GIF stickers used as decoration */
+.gd{position:absolute;z-index:1;height:auto;pointer-events:auto;filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 10px 10px rgba(90,50,170,.3));animation:gfloat 4.2s ease-in-out infinite}
+.gd-inline{display:block;width:clamp(110px,13vw,160px);height:auto;margin-top:22px;filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 10px 10px rgba(90,50,170,.3));animation:gfloat 4.6s ease-in-out infinite}
+.g-bunny{width:clamp(90px,10vw,130px);right:5%;bottom:5%}
+.g-penguin{width:clamp(90px,10vw,130px);left:5%;bottom:5%}
+.g-puppy{width:clamp(90px,9vw,118px);right:4%;bottom:-2px;translate:none;animation:none}
+.g-bunny2{width:clamp(80px,9vw,115px);right:6%;top:7%}
+.gd-video{position:absolute;z-index:1;width:clamp(100px,11vw,150px);aspect-ratio:166/172;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 0 0 4px var(--hot),0 14px 24px -10px rgba(40,15,90,.5);animation:gfloat 4.6s ease-in-out infinite}
+.gd-video-inline{position:relative;display:block;margin-top:26px;width:clamp(120px,13vw,160px)}
+@keyframes gfloat{50%{transform:translateY(-9px)}}
+@keyframes hop{0%{transform:translateY(0)}35%{transform:translateY(-24px) rotate(-7deg) scale(1.08)}100%{transform:none}}
+@media (hover:hover) and (pointer:fine){.gd:hover,.gd-inline:hover{animation:hop .7s cubic-bezier(.34,1.56,.64,1)}}
+
+/* Álvaro Díaz video in a phone-style frame, next to the Spotify card */
+.music .split{grid-template-columns:.85fr 1.35fr}
+.music-right{display:grid;grid-template-columns:minmax(190px,230px) 1fr;gap:clamp(22px,3.4vw,38px);align-items:center}
+.phone{position:relative;margin:0;transform:rotate(-2.5deg);transition:transform .3s var(--ease)}
+.phone-screen{aspect-ratio:9/16;border-radius:34px;overflow:hidden;border:6px solid #fff;box-shadow:0 0 0 4px var(--hot),0 20px 36px -14px rgba(40,15,90,.65);background:var(--ink)}
+.phone video{display:block;width:100%;height:100%;object-fit:cover}
+.music-right .spotify-card.rv{--rd:220ms}
+@media (hover:hover) and (pointer:fine){.phone:hover{transform:rotate(0deg) translateY(-2px)}}
+
 /* Scroll reveals (classes are added by script.js and removed again once shown) */
 .rv{opacity:0;transition:opacity .9s ease,translate 1s cubic-bezier(.2,.9,.25,1),scale .9s cubic-bezier(.34,1.56,.64,1),rotate .9s cubic-bezier(.34,1.56,.64,1);transition-delay:var(--rd,0ms)}
 .rv-left{translate:-110px 0}
@@ -262,6 +284,12 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
   .page-art{width:min(52%,190px);margin-inline:0}
   .pframe{max-width:310px}
   .deco{opacity:.5}
+  .music .split{grid-template-columns:1fr}
+  .music-right{grid-template-columns:1fr;justify-items:center}
+  .phone{width:min(68%,250px)}
+  .spotify-card{width:100%}
+  .gd-inline{width:110px}
+  .cat-stick{justify-self:center;margin:6px 0 0;width:90px}
 }
 @media (max-width:620px){
   body{font-size:1.05rem}

@@ -156,7 +156,9 @@
     ['.gallery-head p', 'up'],
     ['.about .prose, .teacher .prose, .pets-head .prose, #reflection .prose', 'right'],
     ['.music .split > div:first-child .prose', 'up'],
-    ['.spotify-card', 'pop'],
+    ['.phone', 'pop'],
+    ['.spotify-card', 'right'],
+    ['.gd-inline, .gd-video-inline', 'pop'],
     ['.pframe', 'pop'],
     ['.chips li', 'up', 140],
     ['.pet', 'up', 130],
@@ -219,4 +221,10 @@
   }, { passive: true });
   window.addEventListener('resize', frame);
   frame();
+})();
+
+// The little dachshund clip is decoration: it stays still for people who prefer reduced motion.
+(function () {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.gd-video').forEach(function (v) { v.pause(); });
 })();
