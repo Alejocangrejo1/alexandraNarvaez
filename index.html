@@ -49,15 +49,23 @@
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
-  <a class="brand" href="#top" aria-label="Alexandra Jaramillo, home">
+  <a class="brand" href="index.html#top" aria-label="Alexandra Jaramillo, home">
     <svg class="brand-bow" aria-hidden="true"><use href="#bow"/></svg>
     <span>Alexandra</span>
   </a>
-  <nav aria-label="Sections">
-    <a href="#about">About me</a>
-    <a href="#music">Music</a>
-    <a href="#pets">My kids</a>
-    <a href="#teacher">Future teacher</a>
+  <nav aria-label="Main">
+    <div class="dd">
+      <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-about">About Me
+        <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.500 6 6.500l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="dd-menu" id="dd-about">
+        <li><a href="index.html#about">About me</a></li>
+        <li><a href="index.html#music">Music</a></li>
+        <li><a href="index.html#pets">My kids</a></li>
+        <li><a href="index.html#teacher">Future teacher</a></li>
+      </ul>
+    </div>
+    <a class="nav-link" href="jigsaw.html">Jigsaw Activity</a>
   </nav>
 </header>
 
@@ -99,6 +107,10 @@
       <div>
         <p class="eyebrow">About Me</p>
         <h2>Someone who truly knows how to listen</h2>
+        <figure class="portrait">
+          <img src="images/alexandra.jpeg" alt="Alexandra Jaramillo in a red jacket, standing in a green forest" loading="lazy">
+          <svg class="portrait-bow" aria-hidden="true"><use href="#bow"/></svg>
+        </figure>
       </div>
       <div class="prose">
         <p>Hi, I’m Alexandra Jaramillo. I’m 21 years old, and I’m currently pursuing a Bachelor’s Degree in Spanish and English. If I had to describe myself, I would say I’m someone who truly knows how to listen. I enjoy being there for others, offering support when it’s needed, and creating spaces where people feel comfortable just being themselves.</p>
@@ -214,5 +226,6 @@
   </div>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
