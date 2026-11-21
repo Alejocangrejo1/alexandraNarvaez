@@ -193,23 +193,35 @@
       items.push(el);
     });
   });
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var el = e.target;
-        io.unobserve(el);
-        requestAnimationFrame(function () { el.classList.add('in'); });
-        setTimeout(function () {
-          all.forEach(function (c) { el.classList.remove(c); });
-          el.style.removeProperty('--rd');
-        }, 2000);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    items.forEach(function (el) { io.observe(el); });
-  } else {
-    items.forEach(function (el) { all.forEach(function (c) { el.classList.remove(c); }); });
+  // Reveal as soon as an element's REAL (layout) position reaches the screen. Layout offsets ignore the
+  // sideways / zoom transforms and any clipping by the section, so elements that start far off to one
+  // side are still found (an IntersectionObserver cannot see them there).
+  function layoutTop(el) { var t = 0; while (el) { t += el.offsetTop || 0; el = el.offsetParent; } return t; }
+  var pending = items.slice();
+  function show(el) {
+    requestAnimationFrame(function () { el.classList.add('in'); });
+    setTimeout(function () {
+      all.forEach(function (c) { el.classList.remove(c); });
+      el.style.removeProperty('--rd');
+    }, 2000);
   }
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; check(); }); } }
+  function check() {
+    var y = window.pageYOffset, vh = window.innerHeight;
+    pending = pending.filter(function (el) {
+      var top = layoutTop(el), h = el.offsetHeight || 40;
+      var seen = top < y + vh - Math.min(h * 0.15, 140) - vh * 0.04 && top + h > y;
+      if (seen) show(el);
+      return !seen;
+    });
+    if (!pending.length) { window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  check();
+  setTimeout(check, 400);
+  setTimeout(check, 1500);
 
   // 2) Progress bar + parallax decorations
   var bar = document.createElement('div');

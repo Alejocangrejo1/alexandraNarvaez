@@ -10,8 +10,8 @@
   'use strict';
 
   var SRC = 'media/reina-pepiada-instrumental.mp3';
-  var KEY = 'ale-music-v2';
-  var DEFAULT_VOL = 0.067;    // 6.7%: just a soft background
+  var KEY = 'ale-music-v3';
+  var DEFAULT_VOL = 0.034;    // 3.4%: a whisper of background
   var FADE_IN_MS = 2000;
 
   // sessionStorage: every new visit starts at the default again, but moving between pages keeps your choice
