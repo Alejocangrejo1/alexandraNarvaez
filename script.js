@@ -167,7 +167,9 @@
     ['.stat', 'up', 120],
     ['.shot-chart', 'zoom'],
     ['.shot-notes', 'pop'],
-    ['.doc-card', 'right']
+    ['.doc-card', 'right'],
+    ['.video-frame', 'zoom'],
+    ['.beanie', 'pop']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
   var items = [];

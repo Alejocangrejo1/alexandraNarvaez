@@ -78,7 +78,7 @@
 
   // ---------- 3. Tilting cards with a moving shine ----------
   if (fine) {
-    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card').forEach(function (el) {
+    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card, .video-frame').forEach(function (el) {
       el.classList.add('tilt');
       el.addEventListener('pointermove', function (e) {
         var r = el.getBoundingClientRect();
