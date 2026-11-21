@@ -172,6 +172,7 @@
     ['.phase', 'up', 140],
     ['.shot-cards', 'pop'],
     ['.song-card', 'right'],
+    ['.orbit', 'zoom'],
     ['.beanie', 'pop']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
