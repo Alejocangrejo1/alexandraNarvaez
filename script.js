@@ -143,3 +143,80 @@
   window.addEventListener('resize', render);
   render();
 })();
+
+// Scroll animations: text and cards slide in from the sides as you scroll,
+// the decorations drift at different speeds, and a thin bar tracks your progress.
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // 1) Reveal on scroll (classes are removed again after the animation so hover effects keep working)
+  var rules = [
+    ['.sec .eyebrow', 'left'],
+    ['.sec h2', 'left'],
+    ['.gallery-head p', 'up'],
+    ['.about .prose, .teacher .prose, .pets-head .prose, #reflection .prose', 'right'],
+    ['.music .split > div:first-child .prose', 'up'],
+    ['.spotify-card', 'pop'],
+    ['.pframe', 'pop'],
+    ['.chips li', 'up', 140],
+    ['.pet', 'up', 130],
+    ['.carousel', 'zoom'],
+    ['.cat-stick', 'drop']
+  ];
+  var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
+  var items = [];
+  rules.forEach(function (r) {
+    document.querySelectorAll(r[0]).forEach(function (el, i) {
+      if (el.__rv) return;
+      el.__rv = true;
+      el.classList.add('rv', 'rv-' + r[1]);
+      if (r[2]) el.style.setProperty('--rd', (i % 4) * r[2] + 'ms');
+      items.push(el);
+    });
+  });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        io.unobserve(el);
+        requestAnimationFrame(function () { el.classList.add('in'); });
+        setTimeout(function () {
+          all.forEach(function (c) { el.classList.remove(c); });
+          el.style.removeProperty('--rd');
+        }, 2000);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  } else {
+    items.forEach(function (el) { all.forEach(function (c) { el.classList.remove(c); }); });
+  }
+
+  // 2) Progress bar + parallax decorations
+  var bar = document.createElement('div');
+  bar.className = 'progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  var decos = Array.prototype.slice.call(document.querySelectorAll('.deco')).map(function (el, i) {
+    return { el: el, sec: el.closest('.sec'), k: (i % 2 ? 1 : -1) * (0.05 + (i % 3) * 0.04) };
+  });
+  var heroArt = document.querySelector('.hero-art');
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var y = window.scrollY, vh = window.innerHeight;
+    var max = document.documentElement.scrollHeight - vh;
+    bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    decos.forEach(function (d) {
+      var r = d.sec.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > vh + 200) return;
+      d.el.style.setProperty('--py', ((r.top + r.height / 2 - vh / 2) * d.k).toFixed(1) + 'px');
+    });
+    if (heroArt && y < vh * 1.2) heroArt.style.setProperty('--hy', (y * 0.14).toFixed(1) + 'px');
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(frame); }
+  }, { passive: true });
+  window.addEventListener('resize', frame);
+  frame();
+})();
