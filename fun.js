@@ -45,7 +45,7 @@
   // ---------- 2. Hero: spotlight + layered parallax ----------
   var mouse = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
   var parts = [];
-  var DEPTH = { 'wave-k': 16, badge: 34, c1: 26, c2: 26, s1: 40, s2: 40, s3: 36, h1: 34, h2: 34, st1: 30, st2: 30 };
+  var DEPTH = { 'wave-k': 30, badge: 62, c1: 48, c2: 48, s1: 72, s2: 72, s3: 66, h1: 62, h2: 62, st1: 54, st2: 54 };
   var heroArt = document.querySelector('.hero-art');
   var heroSeen = true;
   if (heroArt && fine) {
@@ -78,12 +78,12 @@
 
   // ---------- 3. Tilting cards with a moving shine ----------
   if (fine) {
-    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card, .video-frame').forEach(function (el) {
+    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card, .video-frame, .phase').forEach(function (el) {
       el.classList.add('tilt');
       el.addEventListener('pointermove', function (e) {
         var r = el.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-        el.style.transform = 'perspective(800px) rotateX(' + ((0.5 - py) * 12).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 14).toFixed(2) + 'deg) translateY(-4px)';
+        el.style.transform = 'perspective(800px) rotateX(' + ((0.5 - py) * 22).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 26).toFixed(2) + 'deg) translateY(-4px)';
         el.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
         el.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
       });
@@ -94,8 +94,8 @@
     document.querySelectorAll('.btn, .car-btn').forEach(function (b) {
       b.addEventListener('pointermove', function (e) {
         var r = b.getBoundingClientRect();
-        var dx = (e.clientX - (r.left + r.width / 2)) * 0.22;
-        var dy = (e.clientY - (r.top + r.height / 2)) * 0.3;
+        var dx = (e.clientX - (r.left + r.width / 2)) * 0.42;
+        var dy = (e.clientY - (r.top + r.height / 2)) * 0.5;
         b.style.translate = dx.toFixed(1) + 'px ' + dy.toFixed(1) + 'px';
       });
       b.addEventListener('pointerleave', function () { b.style.translate = ''; });
@@ -161,7 +161,9 @@
   requestAnimationFrame(loop);
 
   // ---------- 7. Hidden sticker rain ----------
-  var SRC = ['bunny.gif', 'penguin.gif', 'puppy.gif', 'kuromi-dance.gif', 'cat.gif', 'dachshund-sticker.png', 'kuromi-wave.png', 'dachshund.gif'];
+  var SRC = ['bunny.gif', 'penguin.gif', 'puppy.gif', 'kuromi-dance.gif', 'cat.gif', 'dachshund-sticker.png', 'kuromi-wave.png', 'dachshund.gif', 'kitten.gif',
+             'kuromi-flower.png', 'kuromi-beanie.png', 'cat-purple.png', 'cat-dancer.png', 'cat-silhouette.png', 'stars.png', 'flower.png',
+             'cat-heart.png', 'lily.png', 'dino.png', 'wings.png', 'kuromi-bow.png', 'kuromi-dragon.png', 'kuromi-tulips.png', 'sparkles3d.png', 'star-chain.png', 'kuromi-umbrella.png', 'kuromi-bear.png'];
   function rain() {
     if (document.querySelector('.rain')) return;
     var box = document.createElement('div');
@@ -169,11 +171,11 @@
     box.setAttribute('aria-hidden', 'true');
     document.body.appendChild(box);
     var W = window.innerWidth, H = window.innerHeight, items = [];
-    for (var i = 0; i < 30; i++) {
+    for (var i = 0; i < 48; i++) {
       var im = document.createElement('img');
       im.src = 'images/' + SRC[i % SRC.length];
       im.alt = '';
-      var s = 64 + Math.random() * 64;
+      var s = 80 + Math.random() * 90;
       im.style.width = s + 'px';
       box.appendChild(im);
       items.push({ el: im, s: s, x: Math.random() * (W - s), y: -s - Math.random() * H * 0.9,
@@ -200,4 +202,21 @@
     pos = key === KONAMI[pos] ? pos + 1 : (key === KONAMI[0] ? 1 : 0);
     if (pos === KONAMI.length) { pos = 0; rain(); }
   });
+})();
+
+// Every few seconds the headline letters do a big "wave".
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var letters = document.querySelectorAll('.hero h1 .ch, .page-hero h1 .ch');
+  if (!letters.length || !letters[0].animate) return;
+  setInterval(function () {
+    if (document.hidden) return;
+    Array.prototype.forEach.call(letters, function (c, i) {
+      c.animate([
+        { transform: 'none' },
+        { transform: 'translateY(-34px) rotate(10deg) scale(1.3)', offset: 0.4 },
+        { transform: 'none' }
+      ], { duration: 700, delay: i * 55, easing: 'cubic-bezier(.3,1.9,.5,1)' });
+    });
+  }, 6500);
 })();

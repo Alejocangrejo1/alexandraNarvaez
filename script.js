@@ -169,6 +169,9 @@
     ['.shot-notes', 'pop'],
     ['.doc-card', 'right'],
     ['.video-frame', 'zoom'],
+    ['.phase', 'up', 140],
+    ['.shot-cards', 'pop'],
+    ['.song-card', 'right'],
     ['.beanie', 'pop']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
@@ -384,8 +387,8 @@
     return s;
   }
   document.querySelectorAll('.hero, .page-hero').forEach(function (hero) {
-    for (var k = 0; k < 9; k++) {
-      var s = icon(pick(['heart', 'sparkle', 'star5']), 14 + Math.random() * 18, pick(palette));
+    for (var k = 0; k < 18; k++) {
+      var s = icon(pick(['heart', 'sparkle', 'star5']), 24 + Math.random() * 30, pick(palette));
       s.setAttribute('class', 'rise');
       s.style.left = (Math.random() * 96).toFixed(1) + '%';
       s.style.setProperty('--rt', (9 + Math.random() * 8).toFixed(1) + 's');
@@ -424,15 +427,15 @@
     var lx = -99, ly = -99;
     window.addEventListener('mousemove', function (e) {
       var d = Math.hypot(e.clientX - lx, e.clientY - ly);
-      if (d < 26) return;
+      if (d < 14) return;
       lx = e.clientX; ly = e.clientY;
-      spawn(e.clientX, e.clientY, (Math.random() - 0.5) * 40, 28 + Math.random() * 30, 9 + Math.random() * 9, 800 + Math.random() * 400);
+      spawn(e.clientX, e.clientY, (Math.random() - 0.5) * 80, 50 + Math.random() * 50, 15 + Math.random() * 20, 900 + Math.random() * 500);
     }, { passive: true });
     window.addEventListener('click', function (e) {
-      for (var n = 0; n < 12; n++) {
-        var ang = (n / 12) * Math.PI * 2 + Math.random() * 0.4;
-        var dist = 40 + Math.random() * 50;
-        spawn(e.clientX, e.clientY, Math.cos(ang) * dist, Math.sin(ang) * dist, 12 + Math.random() * 12, 650 + Math.random() * 350);
+      for (var n = 0; n < 26; n++) {
+        var ang = (n / 26) * Math.PI * 2 + Math.random() * 0.4;
+        var dist = 70 + Math.random() * 120;
+        spawn(e.clientX, e.clientY, Math.cos(ang) * dist, Math.sin(ang) * dist, 18 + Math.random() * 26, 800 + Math.random() * 500);
       }
     });
   }
