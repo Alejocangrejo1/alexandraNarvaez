@@ -755,3 +755,40 @@ button.btn{font-family:var(--font-head)}
 @keyframes slideMarker{0%,6%{left:90%;transform:scale(1.1)}40%,88%{left:10%;transform:scale(1)}100%{left:90%;transform:scale(1.1)}}
 .thermo-scale{display:flex;justify-content:space-between;padding:6px 6px 0;font:700 .95rem var(--font-head);color:var(--ink)}
 @media (max-width:900px){.calm{margin-inline:auto}}
+
+
+/* ===== Background music corner widget ===== */
+.mp{position:fixed;left:14px;bottom:14px;z-index:460;display:flex;align-items:center}
+.mp-disc{position:relative;flex:none;width:62px;height:62px;padding:0;border:0;border-radius:50%;background:none;cursor:pointer;transition:transform .2s var(--ease)}
+.mp-disc:hover{transform:scale(1.08)}
+.mp-disc:active{transform:scale(.94)}
+.mp-vinyl{position:absolute;inset:0;display:block;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 3px var(--hot),0 12px 22px -8px rgba(40,15,90,.65);background:repeating-radial-gradient(circle,#2a1252 0 2px,#3e1f78 2px 4px)}
+.mp.playing .mp-vinyl{animation:spin 3.2s linear infinite}
+.mp-vinyl i{position:absolute;left:50%;top:50%;width:34%;height:34%;translate:-50% -50%;border-radius:50%;background:var(--hot);border:3px solid #fff}
+.mp.muted .mp-disc::after{content:"";position:absolute;left:50%;top:-4px;width:5px;height:70px;margin-left:-2.5px;border-radius:3px;background:#fff;box-shadow:0 0 0 2px var(--hot-deep);transform:rotate(45deg)}
+.mp-note{position:absolute;width:18px;height:18px;color:var(--hot);opacity:0;pointer-events:none}
+.mp.playing .mp-note{animation:mpNote 2.8s ease-out infinite}
+.mp-note.n1{left:46px;top:6px}
+.mp-note.n2{left:10px;top:-2px;color:var(--purple);animation-delay:.9s}
+.mp-note.n3{left:30px;top:0;color:var(--star);animation-delay:1.8s}
+@keyframes mpNote{0%{transform:translate(0,0) rotate(0) scale(.5);opacity:0}15%{opacity:1}100%{transform:translate(18px,-64px) rotate(28deg) scale(1.2);opacity:0}}
+.mp-panel{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;margin-left:0;padding:0;border-radius:24px;background:var(--l2);border:3px solid transparent;box-shadow:none;transition:max-width .45s var(--ease),opacity .25s,margin .3s,padding .3s,border-color .3s}
+.mp:hover .mp-panel,.mp:focus-within .mp-panel,.mp.open .mp-panel{max-width:300px;opacity:1;margin-left:12px;padding:8px 16px 6px 12px;border-color:#fff;box-shadow:0 0 0 3px var(--hot),0 14px 26px -10px rgba(40,15,90,.55)}
+.mp-title{display:block;margin:0 0 2px 4px;font:700 .72rem var(--font-head);letter-spacing:.08em;text-transform:uppercase;color:var(--eyebrow)}
+.mp-row{display:flex;align-items:center;gap:8px}
+.mp-mute{flex:none;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:50%;background:var(--hot);color:var(--ink);cursor:pointer;box-shadow:0 3px 0 var(--hot-deep);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.mp-mute svg{width:22px;height:22px}
+.mp-mute .ic-off{display:none}
+.mp.muted .mp-mute .ic-off{display:block}
+.mp.muted .mp-mute .ic-on{display:none}
+.mp-mute:active{transform:translateY(2px);box-shadow:0 1px 0 var(--hot-deep)}
+.mp-range{width:150px;min-width:0;height:44px;margin:0;background:none;-webkit-appearance:none;appearance:none;cursor:pointer}
+.mp-range::-webkit-slider-runnable-track{height:6px;border-radius:99px;background:linear-gradient(90deg,var(--hot) var(--fill,0%),rgba(58,33,112,.22) var(--fill,0%))}
+.mp-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-7px;border-radius:50%;background:#fff;border:3px solid var(--hot);box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mp-range::-moz-range-track{height:6px;border-radius:99px;background:rgba(58,33,112,.22)}
+.mp-range::-moz-range-progress{height:6px;border-radius:99px;background:var(--hot)}
+.mp-range::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid var(--hot)}
+.mp-hint{position:absolute;left:4px;bottom:76px;display:none;background:#fff;color:var(--ink);border:3px solid var(--hot);border-radius:18px;padding:8px 14px;font:600 .9rem var(--font-head);white-space:nowrap;box-shadow:0 5px 0 var(--hot-deep);animation:bubbleWobble 2.2s ease-in-out infinite}
+.mp.waiting:not(.muted) .mp-hint{display:block}
+@media (max-width:620px){.mp{left:10px;bottom:10px}.mp-disc{width:56px;height:56px}.mp-hint{font-size:.82rem;bottom:68px}.mp-range{width:120px}}
+@media (prefers-reduced-motion:reduce){.mp.playing .mp-vinyl,.mp.playing .mp-note{animation:none}}
