@@ -105,33 +105,43 @@
         <p>Below are the infographics created by all the groups during class.</p>
       </div>
 
-      <!-- Add the posters as images/infographic-1.jpg ... infographic-4.jpg (click opens the full image) -->
-      <ul class="poster-grid">
-        <li class="poster">
-          <a href="images/infographic-1.jpg" target="_blank" rel="noopener" aria-label="Open infographic 1 full size">
-            <div class="slot"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sparkle"/></svg><span>Add infographic</span></div>
-            <img src="images/infographic-1.jpg" alt="Infographic 1 made by one of the groups" loading="lazy" onerror="this.closest('a').removeAttribute('href');this.remove()">
-          </a>
-        </li>
-        <li class="poster">
-          <a href="images/infographic-2.jpg" target="_blank" rel="noopener" aria-label="Open infographic 2 full size">
-            <div class="slot"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sparkle"/></svg><span>Add infographic</span></div>
-            <img src="images/infographic-2.jpg" alt="Infographic 2 made by one of the groups" loading="lazy" onerror="this.closest('a').removeAttribute('href');this.remove()">
-          </a>
-        </li>
-        <li class="poster">
-          <a href="images/infographic-3.jpg" target="_blank" rel="noopener" aria-label="Open infographic 3 full size">
-            <div class="slot"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sparkle"/></svg><span>Add infographic</span></div>
-            <img src="images/infographic-3.jpg" alt="Infographic 3 made by one of the groups" loading="lazy" onerror="this.closest('a').removeAttribute('href');this.remove()">
-          </a>
-        </li>
-        <li class="poster">
-          <a href="images/infographic-4.jpg" target="_blank" rel="noopener" aria-label="Open infographic 4 full size">
-            <div class="slot"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#sparkle"/></svg><span>Add infographic</span></div>
-            <img src="images/infographic-4.jpg" alt="Infographic 4 made by one of the groups" loading="lazy" onerror="this.closest('a').removeAttribute('href');this.remove()">
-          </a>
-        </li>
-      </ul>
+      <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Infographics from every group">
+        <button type="button" class="car-btn prev" aria-label="Previous infographic"><svg viewBox="0 0 12 20" aria-hidden="true"><path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <ul class="track" tabindex="0" aria-label="Scroll or swipe to see more infographics">
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 1 of 6">
+            <a href="images/infographic-1.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 1 full size">
+              <img src="images/infographic-1.jpeg" alt="Infographic 1 made by one of the groups about Oxford's language learning strategies" loading="eager">
+            </a>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 2 of 6">
+            <a href="images/infographic-2.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 2 full size">
+              <img src="images/infographic-2.jpeg" alt="Infographic 2 made by one of the groups about Oxford's language learning strategies" loading="lazy">
+            </a>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 3 of 6">
+            <a href="images/infographic-3.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 3 full size">
+              <img src="images/infographic-3.jpeg" alt="Infographic 3 made by one of the groups about Oxford's language learning strategies" loading="lazy">
+            </a>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 4 of 6">
+            <a href="images/infographic-4.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 4 full size">
+              <img src="images/infographic-4.jpeg" alt="Infographic 4 made by one of the groups about Oxford's language learning strategies" loading="lazy">
+            </a>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 5 of 6">
+            <a href="images/infographic-5.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 5 full size">
+              <img src="images/infographic-5.jpeg" alt="Infographic 5 made by one of the groups about Oxford's language learning strategies" loading="lazy">
+            </a>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="Infographic 6 of 6">
+            <a href="images/infographic-6.jpeg" target="_blank" rel="noopener" aria-label="Open infographic 6 full size">
+              <img src="images/infographic-6.jpeg" alt="Infographic 6 made by one of the groups about Oxford's language learning strategies" loading="lazy">
+            </a>
+          </li>
+        </ul>
+        <button type="button" class="car-btn next" aria-label="Next infographic"><svg viewBox="0 0 12 20" aria-hidden="true"><path d="M2 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="car-foot"><div class="dots"><button type="button" class="dot" aria-label="Go to infographic 1"></button><button type="button" class="dot" aria-label="Go to infographic 2"></button><button type="button" class="dot" aria-label="Go to infographic 3"></button><button type="button" class="dot" aria-label="Go to infographic 4"></button><button type="button" class="dot" aria-label="Go to infographic 5"></button><button type="button" class="dot" aria-label="Go to infographic 6"></button></div><p class="count" aria-live="polite">1 / 6</p></div>
+      </div>
     </div>
   </section>
 
