@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Model Class: TBLT Lesson Plan · Alexandra Jaramillo</title>
+  <meta name="description" content="Alexandra Jaramillo and her classmates designed a 50-minute TBLT lesson that integrates Language Learning Strategies and Zimmerman's self-regulation phases. Includes the lesson plan and the references.">
+  <meta name="theme-color" content="#DCCBFB">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF5CA8' d='M12 21s-9-5.5-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.5-9 12-9 12z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Kuromi-style motifs: horned hood with a pink skull, bat, skull, stars, hearts, paw, note -->
+    <symbol id="skull" viewBox="0 0 24 24">
+      <path d="M12 2C7 2 4 5.500 4 10c0 3 1.500 4.700 3 5.800V19c0 .6.400 1 1 1h1v-2h1.500v2h3v-2H15v2h1c.6 0 1-.4 1-1v-3.200c1.500-1.100 3-2.800 3-5.800 0-4.500-3-8-8-8z" fill="currentColor"/>
+      <circle cx="8.500" cy="11" r="2.200" fill="#1A0D2E"/><circle cx="15.500" cy="11" r="2.200" fill="#1A0D2E"/>
+      <path d="M12 13.500 10.800 16h2.400z" fill="#1A0D2E"/>
+    </symbol>
+    <symbol id="bat" viewBox="0 0 120 60">
+      <path d="M60 22C54 10 44 6 32 10 24 12 14 10 4 3c4 12 5 26 16 32 6-4 14-3 20 3 6-5 14-4 20 6 6-10 14-11 20-6 6-6 14-7 20-3 11-6 12-20 16-32-10 7-20 9-28 7C76 6 66 10 60 22z" fill="currentColor"/>
+    </symbol>
+    <symbol id="sparkle" viewBox="0 0 24 24">
+      <path d="M12 0c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z" fill="currentColor"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 24 24">
+      <path d="M12 21s-9-5.500-9-12a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6.500-9 12-9 12z" fill="currentColor"/>
+    </symbol>
+    <symbol id="paw" viewBox="0 0 24 24">
+      <ellipse cx="6" cy="10" rx="2.400" ry="3" fill="currentColor"/>
+      <ellipse cx="10.500" cy="5.500" rx="2.400" ry="3" fill="currentColor"/>
+      <ellipse cx="16" cy="5.500" rx="2.400" ry="3" fill="currentColor"/>
+      <ellipse cx="20" cy="10" rx="2.400" ry="3" fill="currentColor"/>
+      <path d="M13 11c-3.500 0-6.500 3.500-6.500 6.200C6.500 20 9 20.500 13 20.500s6.500-.5 6.500-3.300C19.500 14.500 16.500 11 13 11z" fill="currentColor"/>
+    </symbol>
+    <symbol id="note" viewBox="0 0 24 24">
+      <path d="M9 3v13.500A3.500 3.500 0 1 1 7 13.300V6l12-3v11.500a3.500 3.500 0 1 1-2-3.200V5.300z" fill="currentColor"/>
+    </symbol>
+  <symbol id="star5" viewBox="0 0 24 24">
+      <path d="M12 2l3 6.500 7 .8-5.200 4.800 1.500 7L12 17.500 5.700 21l1.500-7L2 9.300l7-.8z" fill="currentColor" stroke="#fff" stroke-width="1.200" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="index.html#top" aria-label="Alexandra Jaramillo, home">
+    <span class="brand-img" aria-hidden="true"></span>
+    <span>Alexandra</span>
+  </a>
+  <button class="nav-burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+  <nav id="main-nav" aria-label="Main">
+    <div class="dd">
+      <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-about">About Me
+        <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.500 6 6.500l5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <ul class="dd-menu" id="dd-about">
+        <li><a href="index.html#about">About me</a></li>
+        <li><a href="index.html#music">Music</a></li>
+        <li><a href="index.html#pets">My kids</a></li>
+        <li><a href="index.html#teacher">Future teacher</a></li>
+      </ul>
+    </div>
+    <a class="nav-link" href="jigsaw.html"><span class="nl-long">Jigsaw Activity</span><span class="nl-short">Jigsaw</span></a>
+    <a class="nav-link" href="profile.html"><span class="nl-long">LLS Profile</span><span class="nl-short">Profile</span></a>
+    <a class="nav-link" href="video.html"><span class="nl-long">First Video</span><span class="nl-short">Video</span></a>
+    <a class="nav-link" href="srl.html"><span class="nl-long">SRL Model</span><span class="nl-short">SRL</span></a>
+    <a class="nav-link" href="podcast.html"><span class="nl-long">Podcast</span><span class="nl-short">Podcast</span></a>
+    <a class="nav-link is-current" href="lesson.html" aria-current="page"><span class="nl-long">Lesson Plan</span><span class="nl-short">Plan</span></a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="wrap page-hero-grid">
+      <div>
+        <p class="eyebrow enter" style="--d:0ms">Model Class</p>
+        <h1 class="enter" style="--d:90ms">Model Class: TBLT Lesson Plan Integrating LLS and Self-Regulation</h1>
+        <p class="hero-sub enter" style="--d:180ms">A 50-minute speaking lesson for B1 students at Universidad de Nariño.</p>
+      </div>
+      <div class="page-art enter" style="--d:200ms">
+        <img class="page-dance sway" src="images/kuromi-macaron.png" alt="" aria-hidden="true">
+        <img class="flutter" src="images/butterflies.gif" alt="" aria-hidden="true">
+        <img class="lilac-corner" src="images/lilac-flowers.png" alt="" aria-hidden="true">
+        <svg class="art spark s1" aria-hidden="true"><use href="#sparkle"/></svg>
+        <svg class="art heart h1" aria-hidden="true"><use href="#heart"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true"><div class="ribbon-track"><span>ACADEMIC PORTFOLIO</span><i>✦</i><span>ALEXANDRA JARAMILLO</span><i>♥</i><span>FUTURE TEACHER</span><i>✦</i><span>SPANISH &amp; ENGLISH</span><i>♥</i><span>LLS AND SELF-REFLECTION</span><i>✦</i><span>ACADEMIC PORTFOLIO</span><i>✦</i><span>ALEXANDRA JARAMILLO</span><i>♥</i><span>FUTURE TEACHER</span><i>✦</i><span>SPANISH &amp; ENGLISH</span><i>♥</i><span>LLS AND SELF-REFLECTION</span><i>✦</i></div><span class="dino" aria-hidden="true"><img src="images/dino.png" alt=""></span></div>
+  <div class="wave" style="--from:var(--l1);--to:var(--band)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+
+  <section class="sec dark" id="class" style="--bg:var(--band)">
+    <img class="deco gd g-catdance" src="images/cat-dance.gif" alt="" aria-hidden="true">
+    <img class="deco gd g-blob" src="images/blob-purple.png" alt="" aria-hidden="true">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Where It All Came Together</p>
+        <h2>Designing a class where mistakes are safe</h2>
+      </div>
+      <div class="prose">
+        <p>Planning this 50-minute Task-Based Language Teaching (TBLT) lesson with my classmates (María Alejandra Acosta, Ángela Caicedo, and William Timaná) for B1 students in our program at Universidad de Nariño was where everything we learned during the semester really came together. Instead of designing a regular speaking class focused only on Simple Past grammar, we wanted to deal with something very common in university classrooms: students feeling anxious, over-rehearsing, and avoiding participation because they are scared of making mistakes.</p>
+        <p>To help learners feel safe talking about a personal memory with a meaningful object or photo, we integrated affective strategies and Zimmerman’s self-regulation phases across the entire lesson. Simple steps like starting with a nervous thermometer and breathing exercises, limiting notes to five keywords so students would not read a script, and normalizing errors through the “oops-and-go” rule were meant to lower the pressure of speaking. Combining rotating trio roles, a mid-task self-monitoring pause, and a final Padlet reflection helped turn self-regulation into something practical that students could actually use during the activity.</p>
+        <p>Working on this lesson plan changed how I look at teaching speaking. As a future teacher, I saw that telling students not to be nervous does not work unless we give them concrete tools to manage their anxiety and show them that mistakes are normal. For me, the most valuable part of this experience was realizing how a supportive, well-structured class can help students stop worrying about perfection and focus on sharing their stories.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" style="--from:var(--band);--to:var(--l2)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+
+  <section class="sec lesson-stages" id="stages" style="--bg:var(--l2)">
+    <img class="deco gd g-kheart" src="images/kuromi-heart.png" alt="" aria-hidden="true">
+    <img class="deco gd g-dachsit" src="images/dachshund-sit.gif" alt="" aria-hidden="true">
+    <div class="wrap">
+      <div class="gallery-head">
+        <p class="eyebrow">The Lesson</p>
+        <h2>Fifty minutes, four stages</h2>
+      </div>
+      <div class="stagebar" aria-hidden="true">
+        <span><i>Warm up · 10 min</i></span>
+        <span><i>Pre-task · 10 min</i></span>
+        <span><i>Task · 20 min</i></span>
+        <span><i>Post-task · 10 min</i></span>
+      </div>
+      <ol class="stages">
+        <li class="stage"><span class="stage-min">10 min</span><h3>Warm up</h3><p class="stage-tag">Zimmerman: Forethought (opening)</p><ul><li>Nervous thermometer: students mark how nervous they feel, from 1 to 5.</li><li>“Memory Box”: the teacher tells a 30-second story and fixes a small mistake with a smile.</li><li>Breathing reset: in for four counts, out for six.</li></ul></li>
+        <li class="stage"><span class="stage-min">10 min</span><h3>Pre-task</h3><p class="stage-tag">Zimmerman: Forethought (goal setting)</p><ul><li>Goal card with one personal goal and a positive self-statement.</li><li>Keyword planning: five words only, no script.</li><li>Recovery Toolbox and the “Oops-and-go” rule.</li></ul></li>
+        <li class="stage"><span class="stage-min">20 min</span><h3>Task</h3><p class="stage-tag">Zimmerman: Performance</p><ul><li>Memory Circles: trios with rotating role cards.</li><li>Round 1, then a mid-task self-monitoring pause.</li><li>Round 2, “Memory Swap”, with new trios, and a voluntary Memory Spotlight.</li></ul></li>
+        <li class="stage"><span class="stage-min">10 min</span><h3>Post-task</h3><p class="stage-tag">Zimmerman: Self-reflection</p><ul><li>Anonymous Padlet reflection: goal, what worked, difficulties and next steps.</li><li>Encouraging comments for classmates.</li><li>Wrap-up: a star on the goal card for the goal reached.</li></ul></li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="wave" style="--from:var(--l2);--to:var(--band2)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+
+  <section class="sec dark" id="plan" style="--bg:var(--band2)">
+    <img class="deco gd g-flowerline" src="images/flower-line.gif" alt="" aria-hidden="true">
+    <img class="deco gd g-lilac" src="images/lilac-flowers.png" alt="" aria-hidden="true">
+    <div class="wrap">
+      <div class="gallery-head">
+        <p class="eyebrow">The Whole Plan</p>
+        <h2>The complete lesson plan</h2>
+        <p>Below you can find the complete lesson plan designed for this class and the slides.</p>
+      </div>
+      <article class="doc-card plan-card">
+        <svg class="doc-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" fill="#fff" stroke="currentColor" stroke-width="1.6"/><path d="M14 2v5h5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8M8 15h8M8 18h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <p class="eyebrow">Word document</p>
+        <h3>Lesson Plan Model for TBLT class implementation</h3>
+        <p>Objectives, procedures, materials, differentiation and assessment for the 50-minute lesson.</p>
+        <a class="btn" href="files/Lesson-plan-LLS.docx" download>Download the lesson plan</a>
+      </article>
+    </div>
+  </section>
+
+  <div class="wave" style="--from:var(--band2);--to:var(--l2)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+
+  <section class="sec" id="references" style="--bg:var(--l2)">
+    <img class="deco gd g-refstars" src="images/sparkles3d.png" alt="" aria-hidden="true">
+    <img class="deco gd g-reflily" src="images/lily.png" alt="" aria-hidden="true">
+    <div class="wrap">
+      <div class="gallery-head">
+        <p class="eyebrow">Sources</p>
+        <h2>References</h2>
+        <p>Throughout this semester in LLS and Self-Reflection, the following academic sources guided my reflections, class activities, and lesson planning:</p>
+      </div>
+      <ol class="refs"><li class="ref"><span class="ref-n">1</span><p>Harmer, J. (2015). <em>The practice of English language teaching</em> (5th ed.). Pearson.</p></li><li class="ref"><span class="ref-n">2</span><p>Oxford, R. L. (1990). <em>Language learning strategies: What every teacher should know</em>. Heinle &amp; Heinle.</p></li><li class="ref"><span class="ref-n">3</span><p>Oxford, R. L. (2017). <em>Teaching and researching language learning strategies: Self-regulation in context</em> (2nd ed.). Routledge.</p></li><li class="ref"><span class="ref-n">4</span><p>Purgason, K. B. (2014). Lesson planning in second/foreign language teaching. In M. Celce-Murcia, D. M. Brinton, &amp; M. A. Snow (Eds.), <em>Teaching English as a second or foreign language</em> (4th ed., pp. 362–375). Heinle Cengage Learning.</p></li><li class="ref"><span class="ref-n">5</span><p>Zimmerman, B. J. (2002). Becoming a self-regulated learner: An overview. <em>Theory Into Practice, 41</em>(2), 64–70.</p></li></ol>
+    </div>
+  </section>
+
+  <div class="wave" style="--from:var(--l2);--to:var(--l3)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+
+  <section class="closing" id="goodbye" style="--bg:var(--l3)">
+    <img class="bye-butterflies" src="images/butterflies.gif" alt="" aria-hidden="true">
+    <div class="wrap closing-inner">
+      <img class="bye-wave" src="images/kuromi-wave.png" alt="Kuromi waving goodbye">
+      <p class="eyebrow">The Last Stop</p>
+      <h2 class="closing-title">Thank you for visiting!</h2>
+      <p class="closing-text">This was the last page of Alexandra’s academic portfolio. See you next time!</p>
+      <div class="closing-actions">
+        <a class="btn" href="#top">Back to the top</a>
+        <a class="btn alt" href="index.html">Start again</a>
+        <button class="btn alt" type="button" data-rain>Throw confetti</button>
+      </div>
+      <div class="parade" aria-hidden="true"><img style="--i:0" src="images/bunny.gif" alt=""><img style="--i:1" src="images/penguin.gif" alt=""><img style="--i:2" src="images/monkey.gif" alt=""><img style="--i:3" src="images/puppy.gif" alt=""><img style="--i:4" src="images/cat-dance.gif" alt=""><img style="--i:5" src="images/kitten.gif" alt=""><img style="--i:6" src="images/dachshund-sit.gif" alt=""><img style="--i:7" src="images/penguin-club.gif" alt=""><img style="--i:8" src="images/cat-purple.png" alt=""></div>
+    </div>
+  </section>
+
+  <div class="wave" style="--from:var(--l3);--to:var(--foot)"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0 60V34Q30 -6 60 34Q90 -6 120 34Q150 -6 180 34Q210 -6 240 34Q270 -6 300 34Q330 -6 360 34Q390 -6 420 34Q450 -6 480 34Q510 -6 540 34Q570 -6 600 34Q630 -6 660 34Q690 -6 720 34Q750 -6 780 34Q810 -6 840 34Q870 -6 900 34Q930 -6 960 34Q990 -6 1020 34Q1050 -6 1080 34Q1110 -6 1140 34Q1170 -6 1200 34Q1230 -6 1260 34Q1290 -6 1320 34Q1350 -6 1380 34Q1410 -6 1440 34L1440 60Z"/></svg></div>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <span class="foot-img" aria-hidden="true"></span>
+    <p><strong>Alexandra Jaramillo</strong> · Bachelor’s Degree in Spanish and English</p>
+    <p>LLS and Self-Reflection · Professor Edward Enríquez Ricaurte</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="fun.js"></script>
+</body>
+</html>

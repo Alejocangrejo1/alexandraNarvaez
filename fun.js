@@ -78,7 +78,7 @@
 
   // ---------- 3. Tilting cards with a moving shine ----------
   if (fine) {
-    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card, .video-frame, .phase').forEach(function (el) {
+    document.querySelectorAll('.pet figure, .stat, .doc-card, .spotify-card, .video-frame, .phase, .stage, .ref').forEach(function (el) {
       el.classList.add('tilt');
       el.addEventListener('pointermove', function (e) {
         var r = el.getBoundingClientRect();
@@ -199,7 +199,15 @@
       else { box.classList.add('out'); setTimeout(function () { box.remove(); }, 700); }
     })(t0);
   }
-  document.querySelectorAll('.badge').forEach(function (b) { b.addEventListener('click', rain); });
+  document.querySelectorAll('.badge, [data-rain]').forEach(function (b) { b.addEventListener('click', rain); });
+  // The farewell: the sticker rain starts by itself the first time the closing comes into view.
+  var closing = document.querySelector('.closing');
+  if (closing && 'IntersectionObserver' in window) {
+    var co = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { co.disconnect(); setTimeout(rain, 500); } });
+    }, { threshold: 0.55 });
+    co.observe(closing);
+  }
   var KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'], pos = 0;
   window.addEventListener('keydown', function (e) {
     var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
@@ -211,7 +219,7 @@
 // Every few seconds the headline letters do a big "wave".
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var letters = document.querySelectorAll('.hero h1 .ch, .page-hero h1 .ch');
+  var letters = document.querySelectorAll('.hero h1 .ch, .page-hero h1 .ch, .closing-title .ch');
   if (!letters.length || !letters[0].animate) return;
   setInterval(function () {
     if (document.hidden) return;

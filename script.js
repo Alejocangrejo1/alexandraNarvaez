@@ -174,6 +174,11 @@
     ['.song-card', 'right'],
     ['.orbit', 'zoom'],
     ['.mascot', 'pop'],
+    ['.stage', 'up', 150],
+    ['.ref', 'up', 120],
+    ['.stagebar', 'zoom'],
+    ['.plan-card', 'pop'],
+    ['.bye-wave', 'pop'],
     ['.beanie', 'pop']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
@@ -347,10 +352,23 @@
     }
   }
 
+  // Lesson stage bar fills in when it scrolls into view
+  var bars = document.querySelectorAll('.stagebar');
+  if (bars.length) {
+    if (reduce || !('IntersectionObserver' in window)) {
+      bars.forEach(function (b) { b.classList.add('fill'); });
+    } else {
+      var bo = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { bo.unobserve(e.target); e.target.classList.add('fill'); } });
+      }, { threshold: 0.5 });
+      bars.forEach(function (b) { bo.observe(b); });
+    }
+  }
+
   if (reduce) return;
 
   // Headline letters
-  document.querySelectorAll('.hero h1, .page-hero h1').forEach(function (h) {
+  document.querySelectorAll('.hero h1, .page-hero h1, .closing-title').forEach(function (h) {
     h.setAttribute('aria-label', h.innerText.replace(/\s+/g, ' ').trim());
     var i = 0, frag = document.createDocumentFragment();
     Array.prototype.slice.call(h.childNodes).forEach(function (n) {
@@ -388,7 +406,7 @@
     s.style.cssText = 'width:' + size + 'px;height:' + size + 'px;color:' + color;
     return s;
   }
-  document.querySelectorAll('.hero, .page-hero').forEach(function (hero) {
+  document.querySelectorAll('.hero, .page-hero, .closing').forEach(function (hero) {
     for (var k = 0; k < 18; k++) {
       var s = icon(pick(['heart', 'sparkle', 'star5']), 24 + Math.random() * 30, pick(palette));
       s.setAttribute('class', 'rise');
