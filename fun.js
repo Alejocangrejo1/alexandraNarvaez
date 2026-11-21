@@ -163,7 +163,9 @@
   // ---------- 7. Hidden sticker rain ----------
   var SRC = ['bunny.gif', 'penguin.gif', 'puppy.gif', 'kuromi-dance.gif', 'cat.gif', 'dachshund-sticker.png', 'kuromi-wave.png', 'dachshund.gif', 'kitten.gif',
              'kuromi-flower.png', 'kuromi-beanie.png', 'cat-purple.png', 'cat-dancer.png', 'cat-silhouette.png', 'stars.png', 'flower.png',
-             'cat-heart.png', 'lily.png', 'dino.png', 'wings.png', 'kuromi-bow.png', 'kuromi-dragon.png', 'kuromi-tulips.png', 'sparkles3d.png', 'star-chain.png', 'kuromi-umbrella.png', 'kuromi-bear.png'];
+             'cat-heart.png', 'lily.png', 'dino.png', 'wings.png', 'kuromi-bow.png', 'kuromi-dragon.png', 'kuromi-tulips.png', 'sparkles3d.png', 'star-chain.png', 'kuromi-umbrella.png', 'kuromi-bear.png',
+             'penguin-club.gif', 'cat-black.gif', 'bear-white.gif', 'monkey.gif', 'dachshund-sit.gif', 'cat-dance.gif', 'flower-line.gif', 'butterflies.gif',
+             'star-patch.png', 'kuromi-cupcake.png', 'kuromi-sad.png', 'kuromi-glass.png', 'lilac-flowers.png', 'kuromi-macaron.png', 'kuromi-heart.png', 'blob-purple.png'];
   function rain() {
     if (document.querySelector('.rain')) return;
     var box = document.createElement('div');

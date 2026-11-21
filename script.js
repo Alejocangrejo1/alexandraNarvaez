@@ -173,6 +173,7 @@
     ['.shot-cards', 'pop'],
     ['.song-card', 'right'],
     ['.orbit', 'zoom'],
+    ['.mascot', 'pop'],
     ['.beanie', 'pop']
   ];
   var all = ['rv', 'in', 'rv-left', 'rv-right', 'rv-up', 'rv-zoom', 'rv-pop', 'rv-drop'];
@@ -440,4 +441,21 @@
       }
     });
   }
+})();
+
+// Mobile / tablet menu: one button opens the whole list of pages.
+(function () {
+  var nav = document.querySelector('.nav');
+  var btn = nav && nav.querySelector('.nav-burger');
+  if (!btn) return;
+  function set(open) {
+    nav.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!nav.classList.contains('open')); });
+  document.addEventListener('click', function (e) { if (!nav.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  nav.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 1000) set(false); });
 })();
