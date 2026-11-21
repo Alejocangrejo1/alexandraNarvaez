@@ -171,27 +171,29 @@
     box.setAttribute('aria-hidden', 'true');
     document.body.appendChild(box);
     var W = window.innerWidth, H = window.innerHeight, items = [];
-    for (var i = 0; i < 48; i++) {
+    var COUNT = W < 700 ? 70 : 130;
+    for (var i = 0; i < COUNT; i++) {
       var im = document.createElement('img');
       im.src = 'images/' + SRC[i % SRC.length];
       im.alt = '';
-      var s = 80 + Math.random() * 90;
+      var s = 70 + Math.random() * 100;
       im.style.width = s + 'px';
       box.appendChild(im);
-      items.push({ el: im, s: s, x: Math.random() * (W - s), y: -s - Math.random() * H * 0.9,
-                   vx: (Math.random() - 0.5) * 3, vy: Math.random() * 2, r: Math.random() * 40 - 20, vr: (Math.random() - 0.5) * 6 });
+      items.push({ el: im, s: s, x: Math.random() * (W - s), y: -s - Math.random() * H * 2.4,
+                   vx: (Math.random() - 0.5) * 7, vy: Math.random() * 4, r: Math.random() * 40 - 20, vr: (Math.random() - 0.5) * 10 });
     }
     var t0 = performance.now(), prev = t0;
     (function step(now) {
       var f = Math.min(0.033, (now - prev) / 1000) * 60;
       prev = now;
       items.forEach(function (o) {
-        o.vy += 0.45 * f; o.x += o.vx * f; o.y += o.vy * f; o.r += o.vr * f;
-        if (o.y > H - o.s) { o.y = H - o.s; o.vy *= -0.55; o.vx *= 0.9; o.vr *= 0.8; if (Math.abs(o.vy) < 1.2) o.vy = 0; }
+        o.vy += 0.38 * f; o.x += o.vx * f; o.y += o.vy * f; o.r += o.vr * f;
+        if (o.y > H - o.s && o.vy > 0) { o.y = H - o.s; o.vy = -(Math.sqrt(2 * 0.38 * H * 0.95) * (0.55 + Math.random() * 0.45)); o.vx += (Math.random() - 0.5) * 4; o.vx *= 0.99; o.vr = (Math.random() - 0.5) * 14; }
         if (o.x < 0 || o.x > W - o.s) { o.vx *= -1; o.x = clamp(o.x, 0, W - o.s); }
+        if (o.y < -H) o.vy = Math.max(o.vy, 0);
         o.el.style.transform = 'translate(' + o.x.toFixed(1) + 'px,' + o.y.toFixed(1) + 'px) rotate(' + o.r.toFixed(1) + 'deg)';
       });
-      if (now - t0 < 7000) { requestAnimationFrame(step); }
+      if (now - t0 < 13000) { requestAnimationFrame(step); }
       else { box.classList.add('out'); setTimeout(function () { box.remove(); }, 700); }
     })(t0);
   }
