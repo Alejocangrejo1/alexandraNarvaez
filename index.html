@@ -150,7 +150,14 @@
       <div class="music-right">
         <figure class="phone">
           <div class="phone-screen">
-            <video src="images/alvaro.mp4" poster="images/alvaro-poster.jpg" controls playsinline preload="metadata" aria-label="A video of Álvaro Díaz"></video>
+            <video src="images/alvaro.mp4" poster="images/alvaro-poster.jpg" autoplay muted loop playsinline disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-label="A looping video of Álvaro Díaz"></video>
+            <div class="vol" role="group" aria-label="Video volume">
+              <button class="vol-btn" type="button" aria-pressed="false" aria-label="Turn sound on">
+                <svg class="ic-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M16 9.500l5 5M21 9.500l-5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <svg class="ic-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path d="M15.500 9a4 4 0 0 1 0 6M18 6.500a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+              <input class="vol-range" type="range" min="0" max="100" value="0" aria-label="Volume">
+            </div>
           </div>
           <svg class="pc c1" aria-hidden="true"><use href="#star5"/></svg>
           <svg class="pc c2" aria-hidden="true"><use href="#heart"/></svg>

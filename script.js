@@ -228,3 +228,57 @@
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.querySelectorAll('.gd-video').forEach(function (v) { v.pause(); });
 })();
+
+// Álvaro Díaz video: always playing in a loop, sound off by default.
+// The only control is volume (a sound on/off button and a slider).
+(function () {
+  var v = document.querySelector('.phone video');
+  if (!v) return;
+  var box = v.closest('.phone');
+  var btn = box.querySelector('.vol-btn');
+  var rng = box.querySelector('.vol-range');
+  var last = 60;
+
+  v.muted = true;
+  v.loop = true;
+  v.volume = 0.6;
+
+  function sync() {
+    var on = !v.muted && v.volume > 0;
+    box.classList.toggle('sound-on', on);
+    btn.setAttribute('aria-pressed', String(on));
+    btn.setAttribute('aria-label', on ? 'Turn sound off' : 'Turn sound on');
+    rng.value = on ? Math.round(v.volume * 100) : 0;
+    rng.style.setProperty('--fill', rng.value + '%');
+  }
+
+  btn.addEventListener('click', function () {
+    if (!v.muted && v.volume > 0) {
+      last = Math.round(v.volume * 100) || 60;
+      v.muted = true;
+    } else {
+      v.muted = false;
+      v.volume = last / 100;
+    }
+    v.play().catch(function () {});
+    sync();
+  });
+  rng.addEventListener('input', function () {
+    var val = Number(rng.value);
+    if (val === 0) {
+      v.muted = true;
+    } else {
+      v.muted = false;
+      v.volume = val / 100;
+      last = val;
+    }
+    v.play().catch(function () {});
+    sync();
+  });
+
+  // It never stays paused (no pause control exists; this also covers browser power saving).
+  v.addEventListener('pause', function () { if (!v.ended && !document.hidden) v.play().catch(function () {}); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) v.play().catch(function () {}); });
+  v.play().catch(function () {});
+  sync();
+})();
