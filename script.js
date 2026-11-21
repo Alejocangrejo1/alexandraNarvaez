@@ -143,9 +143,3 @@
   window.addEventListener('resize', render);
   render();
 })();
-
-// Cat clip: loops quietly, but stays still for people who prefer reduced motion.
-(function () {
-  var v = document.querySelector('.sticker');
-  if (v && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.pause(); }
-})();
