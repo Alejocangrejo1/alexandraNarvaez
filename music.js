@@ -1,24 +1,30 @@
-// Background music: an instrumental that is always on, with a small volume control in the corner.
-//  - there is no play/pause button: to turn it off you mute it, to turn it on you raise the volume
+// Background music: an instrumental that is always on, very quiet, with a small volume control in the corner.
+//  - it starts as soon as the page opens; there is no play/pause button
+//    (to turn it off you mute it, to turn it on you raise the volume)
+//  - it begins at a very low volume, just a soft background
+//  - browsers only allow SOUND after a first tap / click / key press, so the song starts playing
+//    right away in silent mode and fades its sound in on that first interaction
 //  - the volume and the position in the song are remembered while you move between the pages
-//  - browsers only allow sound after the first tap/click/key, so it starts on that first interaction
 //  - it ducks (goes silent) while the Álvaro Díaz video has its own sound on
 (function () {
   'use strict';
 
   var SRC = 'media/reina-pepiada-instrumental.mp3';
   var KEY = 'ale-music';
-  var DEFAULT_VOL = 0.3;
+  var DEFAULT_VOL = 0.1;      // soft, "background" level
+  var FADE_IN_MS = 2500;
 
-  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
-  function save(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+  // sessionStorage: every new visit starts quiet again, but moving between pages keeps your choice
+  function load() { try { return JSON.parse(sessionStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function save(o) { try { sessionStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
   var saved = load();
   var vol = typeof saved.v === 'number' ? clamp(saved.v, 0, 1) : DEFAULT_VOL;   // chosen volume, 0 = muted
   var lastLoud = saved.l > 0 ? saved.l : DEFAULT_VOL;
   var ducked = false;
-  var started = false;
+  var playing = false;        // the song is running (maybe still silent, waiting for the first interaction)
+  var soundAllowed = false;   // the browser has let us use sound
   var wasPlaying = false;
 
   // ---------------------------------------------------------------- audio
@@ -27,7 +33,9 @@
   audio.loop = true;
   audio.preload = 'auto';
   audio.volume = 0;
+  audio.muted = true;         // muted playback is allowed to start by itself
   window.__aleMusic = audio;
+
   // It loops forever; if a browser ever ignores `loop`, start it again by hand when it ends.
   audio.addEventListener('ended', function () {
     audio.currentTime = 0;
@@ -53,7 +61,6 @@
   function targetVolume() { return ducked ? 0 : vol; }
 
   // ---------------------------------------------------------------- the corner widget
-  var NS = 'http://www.w3.org/2000/svg';
   var root = document.createElement('div');
   root.className = 'mp';
   root.setAttribute('role', 'group');
@@ -74,8 +81,7 @@
         '</button>' +
         '<input class="mp-range" type="range" min="0" max="100" step="1" aria-label="Music volume">' +
       '</div>' +
-    '</div>' +
-    '<span class="mp-hint" aria-hidden="true">Tap anywhere to start the music ♪</span>';
+    '</div>';
   document.body.appendChild(root);
 
   var disc = root.querySelector('.mp-disc');
@@ -83,39 +89,49 @@
   var range = root.querySelector('.mp-range');
 
   function sync() {
-    var audible = started && vol > 0 && !ducked;
-    root.classList.toggle('playing', audible);
+    root.classList.toggle('playing', playing && vol > 0 && !ducked);
     root.classList.toggle('muted', vol === 0);
-    root.classList.toggle('waiting', !started);
     range.value = Math.round(vol * 100);
     range.style.setProperty('--fill', range.value + '%');
     muteBtn.setAttribute('aria-label', vol > 0 ? 'Mute the music' : 'Turn the music on');
   }
 
   function persist() {
-    save({ v: vol, l: lastLoud, t: audio.currentTime || 0, at: Date.now(), playing: started && !audio.paused });
+    save({ v: vol, l: lastLoud, t: audio.currentTime || 0, at: Date.now(), playing: playing && !audio.paused });
   }
 
   // ---------------------------------------------------------------- starting (autoplay rules)
-  function tryStart() {
+  function unlockSound() {
+    // called after the first real interaction: the browser now lets us make sound
+    soundAllowed = true;
+    removeGestureListeners();
+    audio.muted = false;
+    if (!playing || audio.paused) { startPlayback(false); return; }
+    rampTo(targetVolume(), FADE_IN_MS);
+  }
+  function startPlayback(withSound) {
+    audio.muted = !withSound;
     var p = audio.play();
     if (p && p.then) {
       p.then(function () {
-        started = true;
+        playing = true;
         wasPlaying = true;
-        rampTo(targetVolume(), 1800);
-        removeGestureListeners();
+        if (withSound) { soundAllowed = true; removeGestureListeners(); rampTo(targetVolume(), FADE_IN_MS); }
         sync();
-      }).catch(function () { started = false; sync(); });
+      }).catch(function () {
+        if (withSound) { startPlayback(false); }      // sound not allowed yet: run silently and wait for a tap
+        else { playing = false; sync(); }               // even silent playback refused: wait for the first tap
+      });
     } else {
-      started = true; sync();
+      playing = true; sync();
     }
   }
   var gestureEvents = ['pointerdown', 'keydown', 'touchstart'];
-  function onGesture() { if (!started) tryStart(); }
+  function onGesture() { unlockSound(); }
   function removeGestureListeners() { gestureEvents.forEach(function (ev) { window.removeEventListener(ev, onGesture, true); }); }
   gestureEvents.forEach(function (ev) { window.addEventListener(ev, onGesture, true); });
-  tryStart();   // works straight away if the browser already allows sound for this site
+
+  startPlayback(true);   // straight away: with sound if the browser already allows it, otherwise silent until the first tap
 
   // ---------------------------------------------------------------- controls
   muteBtn.addEventListener('click', function () {
@@ -157,11 +173,11 @@
   // 2) Pause while the tab is hidden, pick up again when it comes back.
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) {
-      wasPlaying = started && !audio.paused;
+      wasPlaying = playing && !audio.paused;
       persist();
       audio.pause();
     } else if (wasPlaying) {
-      audio.play().then(function () { rampTo(targetVolume(), 800); }).catch(function () {});
+      audio.play().then(function () { if (soundAllowed) rampTo(targetVolume(), 800); }).catch(function () {});
     }
   });
   // 3) Remember where we are, so the next page continues from the same moment.
