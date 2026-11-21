@@ -3,9 +3,9 @@
   --l1:#DCCBFB;
   --l2:#F0E8FF;
   --l3:#C9B0F6;
-  --band:#7A52CC;
-  --band2:#6A43B8;
-  --foot:#4B2C8F;
+  --band:#C2AAF5;
+  --band2:#B79EF2;
+  --foot:#AE94EE;
   --ink:#3A2170;
   --ink-soft:#5A3F9C;
   --eyebrow:#A3236F;
@@ -44,14 +44,14 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .hero h1,.page-hero h1{text-shadow:3px 3px 0 #fff,6px 6px 0 var(--hot)}
 
 /* Rich-purple bands */
-.dark{color:#fff}
-.dark h2{color:#fff}
-.dark .eyebrow{color:var(--hot-soft)}
+.dark{color:var(--ink)}
+.dark h2{color:var(--ink)}
+.dark .eyebrow{color:#7F1A58}
 
 /* Nav */
 .nav{position:sticky;top:12px;z-index:150;width:min(1120px,100% - 24px);margin:12px auto 0;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 14px;background:rgba(240,232,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:3px solid #fff;border-radius:999px;box-shadow:0 0 0 3px var(--purple),0 12px 28px -12px rgba(90,50,170,.6)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 1.2rem var(--font-head);color:var(--ink)}
-.brand-img{width:42px;height:42px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--hot);background:url(images/kuromi1.jpg) 43% 56%/250% no-repeat;transition:transform .3s var(--ease)}
+.brand-img{width:42px;height:42px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px var(--hot);background:url(images/kuromi-wave.jpg) 49% 62%/230% no-repeat;transition:transform .3s var(--ease)}
 .brand:hover .brand-img{transform:rotate(-8deg) scale(1.1)}
 .nav nav{display:flex;align-items:center;gap:4px}
 .nav-link,.dd-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;text-decoration:none;font:600 1rem var(--font-body);color:var(--ink);background:none;border:0;cursor:pointer;padding:0 16px;border-radius:999px;transition:background .2s,transform .2s var(--ease)}
@@ -144,7 +144,7 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .split{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,6vw,80px);align-items:center}
 .about .split>div:first-child,.teacher .split>div:first-child{align-self:start;position:sticky;top:100px}
 .sec{background-image:radial-gradient(rgba(255,255,255,.5) 2px,transparent 2.5px);background-size:34px 34px}
-.dark{background-image:radial-gradient(rgba(255,255,255,.16) 2px,transparent 2.5px)}
+.dark{background-image:radial-gradient(rgba(255,255,255,.45) 2px,transparent 2.5px)}
 
 .chips{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-wrap:wrap;gap:10px}
 .chips li{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--purple);border-radius:999px;padding:8px 16px;font:600 1rem var(--font-head);color:var(--ink);transition:transform .2s var(--ease)}
@@ -157,12 +157,14 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .deco.d2{width:46px;height:46px;left:3%;bottom:8%;color:var(--star)}
 .deco.d3{width:90px;height:50px;right:6%;bottom:9%;color:var(--purple)}
 .deco.d4{width:54px;height:54px;left:5%;top:10%;color:#fff}
-.dark .deco.d3{color:var(--l3)}
+.dark .deco.d3{color:#fff}
 
 /* Teacher: Kuromi frame */
 .k-side{max-width:250px;margin-top:28px;transform:rotate(-3deg);transition:transform .3s var(--ease)}
 .k-side:hover{transform:rotate(0deg) translateY(-2px)}
 .k-side img{aspect-ratio:632/1124}
+.k-side.k-sq{max-width:290px}
+.k-side.k-sq img{aspect-ratio:1}
 
 /* Music card */
 .music .split>div:first-child .prose{margin-top:20px}
@@ -233,10 +235,10 @@ h3{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600}
 .count{margin:0;font:600 1rem var(--font-head);color:var(--ink)}
 
 /* Footer */
-.footer{background:var(--foot);color:#fff;padding:36px 0 44px;text-align:center;border-top:4px solid var(--hot)}
+.footer{background:var(--foot);color:var(--ink);padding:36px 0 44px;text-align:center;border-top:4px solid var(--hot)}
 .foot{display:grid;gap:6px;justify-items:center}
 .foot p{margin:0;font-size:1rem}
-.foot-img{width:78px;height:78px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 4px var(--hot);background:url(images/kuromi1.jpg) 43% 56%/250% no-repeat;margin-bottom:10px}
+.foot-img{width:78px;height:78px;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 4px var(--hot);background:url(images/kuromi-wave.jpg) 49% 62%/230% no-repeat;margin-bottom:10px}
 
 /* Responsive */
 @media (max-width:900px){
