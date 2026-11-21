@@ -177,6 +177,7 @@
     ['.stage', 'up', 150],
     ['.ref', 'up', 120],
     ['.stagebar', 'zoom'],
+    ['.calm', 'zoom'],
     ['.plan-card', 'pop'],
     ['.bye-wave', 'pop'],
     ['.beanie', 'pop']

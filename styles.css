@@ -726,3 +726,32 @@ button.btn{font-family:var(--font-head)}
 .plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;max-width:980px;margin:0 auto}
 .plan-grid .plan-card{max-width:none;margin:0}
 @media (max-width:900px){.plan-grid{grid-template-columns:1fr}}
+
+
+/* ===== Lesson plan: "mistakes are safe" scene (nervous thermometer 5 -> 1, Oops-and-go) ===== */
+.calm{width:340px;max-width:100%;margin:26px 0 0 4px;position:relative}
+.say{position:relative;display:block;width:190px;height:58px;margin:0 0 4px 70px;background:#fff;border:3px solid var(--hot);border-radius:24px;box-shadow:0 5px 0 var(--hot-deep);animation:bubbleWobble 2.2s ease-in-out infinite}
+.say::after{content:"";position:absolute;left:34px;bottom:-17px;width:22px;height:22px;background:#fff;border-right:3px solid var(--hot);border-bottom:3px solid var(--hot);transform:rotate(45deg) skew(8deg,8deg);border-radius:0 0 6px 0}
+.say span{position:absolute;inset:0;display:grid;place-items:center;font:700 1.45rem var(--font-head);color:var(--ink);white-space:nowrap}
+.say-b{opacity:0;color:var(--hot-deep)}
+.say-a{animation:sayA 8s ease-in-out infinite}
+.say-b{animation:sayB 8s ease-in-out infinite}
+@keyframes bubbleWobble{0%,100%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(3deg) scale(1.05)}}
+@keyframes sayA{0%,38%{opacity:1;transform:scale(1)}46%,96%{opacity:0;transform:scale(.5) translateY(10px)}100%{opacity:1;transform:scale(1)}}
+@keyframes sayB{0%,42%{opacity:0;transform:scale(.5) translateY(10px)}50%{opacity:1;transform:scale(1.25)}56%,90%{opacity:1;transform:scale(1)}96%,100%{opacity:0;transform:scale(.5)}}
+.calm-stage{position:relative;height:215px}
+.calm-k{position:absolute;left:50%;bottom:0;width:58%;height:auto;translate:-50% 0;transform-origin:50% 100%;filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 12px 10px rgba(40,15,90,.35))}
+.calm-k.happy{opacity:0;animation:calmBob 2.4s ease-in-out infinite,fadeHappy 8s ease-in-out infinite}
+.calm-k.sad{animation:calmShake .9s ease-in-out infinite,fadeSad 8s ease-in-out infinite}
+@keyframes calmBob{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-22px) rotate(5deg)}}
+@keyframes calmShake{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-7px) rotate(-3deg)}75%{transform:translateX(7px) rotate(3deg)}}
+@keyframes fadeSad{0%,40%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
+@keyframes fadeHappy{0%,40%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
+.calm-spark{position:absolute;right:2%;top:2%;width:20%;height:auto;animation:twinkle 2.4s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(40,15,90,.3))}
+.thermo{margin-top:12px}
+.thermo-label{display:block;margin-bottom:8px;font:600 .85rem var(--font-head);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.thermo-bar{position:relative;height:24px;border-radius:999px;border:3px solid #fff;background:linear-gradient(90deg,#A9E5C3,var(--star) 50%,var(--hot));box-shadow:0 0 0 3px var(--purple)}
+.thermo-marker{position:absolute;top:50%;left:90%;width:34px;height:34px;margin:-17px 0 0 -17px;color:#fff;filter:drop-shadow(0 0 0 var(--ink)) drop-shadow(1.5px 0 0 var(--ink)) drop-shadow(-1.5px 0 0 var(--ink)) drop-shadow(0 1.5px 0 var(--ink)) drop-shadow(0 -1.5px 0 var(--ink));animation:slideMarker 8s cubic-bezier(.45,0,.2,1) infinite}
+@keyframes slideMarker{0%,6%{left:90%;transform:scale(1.1)}40%,88%{left:10%;transform:scale(1)}100%{left:90%;transform:scale(1.1)}}
+.thermo-scale{display:flex;justify-content:space-between;padding:6px 6px 0;font:700 .95rem var(--font-head);color:var(--ink)}
+@media (max-width:900px){.calm{margin-inline:auto}}
