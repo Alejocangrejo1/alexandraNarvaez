@@ -602,7 +602,7 @@ main{overflow-x:clip}
 .nav.open .nav-burger span:nth-child(1){top:22px;transform:rotate(45deg)}
 .nav.open .nav-burger span:nth-child(2){opacity:0}
 .nav.open .nav-burger span:nth-child(3){top:22px;transform:rotate(-45deg)}
-@media (max-width:1000px){
+@media (max-width:1180px){
   .nav{flex-wrap:wrap;align-items:center;gap:8px;padding:8px 10px 8px 14px}
   .nav-burger{display:block}
   .nav nav{display:none;order:3;flex-basis:100%;flex-direction:column;align-items:stretch;gap:2px;padding:8px 2px 6px;max-height:72vh;overflow-y:auto}
@@ -792,3 +792,19 @@ button.btn{font-family:var(--font-head)}
 .mp.waiting:not(.muted) .mp-hint{display:block}
 @media (max-width:620px){.mp{left:10px;bottom:10px}.mp-disc{width:56px;height:56px}.mp-hint{font-size:.82rem;bottom:68px}.mp-range{width:120px}}
 @media (prefers-reduced-motion:reduce){.mp.playing .mp-vinyl,.mp.playing .mp-note{animation:none}}
+
+
+/* ===== Álvaro Díaz pictures, scattered along the bottom of the music section ===== */
+.album{position:absolute;z-index:1;bottom:20px;width:clamp(84px,9vw,140px);aspect-ratio:1;object-fit:cover;border-radius:18px;border:4px solid #fff;box-shadow:0 0 0 3px var(--hot),0 14px 22px -10px rgba(40,15,90,.6);pointer-events:auto;translate:none;transform:rotate(var(--r,0deg));animation:albumFloat 4.2s ease-in-out infinite;animation-delay:var(--d,0s);transition:box-shadow .25s}
+.album.a1{left:25%;--r:7deg;--d:-.6s}
+.album.a2{left:43%;bottom:34px;--r:-6deg;--d:-1.8s;width:clamp(92px,10vw,152px)}
+.album.a3{left:61%;--r:5deg;--d:-2.6s}
+.album.a4{left:78%;bottom:42px;--r:-9deg;--d:-3.4s;width:clamp(78px,8vw,120px)}
+@keyframes albumFloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg))}50%{transform:translateY(-20px) rotate(calc(var(--r,0deg) + 6deg))}}
+@media (hover:hover) and (pointer:fine){.album:hover{animation:albumPop .7s cubic-bezier(.34,1.9,.5,1);box-shadow:0 0 0 3px var(--hot-deep),0 20px 30px -10px rgba(255,92,168,.6)}}
+@keyframes albumPop{0%{transform:rotate(var(--r,0deg)) scale(1)}40%{transform:rotate(0deg) translateY(-34px) scale(1.25)}100%{transform:rotate(var(--r,0deg)) scale(1)}}
+@media (max-width:900px){.album.a1{left:30%}.album.a2{left:48%}.album.a3{left:64%}.album.a4{display:none}}
+@media (max-width:620px){.album{width:74px;bottom:14px}.album.a1{left:33%}.album.a2{left:53%;bottom:22px}.album.a3{display:none}}
+
+.nav-link,.dd-btn{white-space:nowrap}
+@media (max-width:1180px){.nav-link,.dd-btn{white-space:normal}}

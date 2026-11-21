@@ -476,5 +476,5 @@
   document.addEventListener('click', function (e) { if (!nav.contains(e.target)) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   nav.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
-  window.addEventListener('resize', function () { if (window.innerWidth > 1000) set(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 1180) set(false); });
 })();
